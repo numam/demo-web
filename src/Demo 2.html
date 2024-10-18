@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="./output.css">
+</head>
+
+<body class="bg-blue-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+        <div class="mb-4">
+            <input type="text" id="todo-input" placeholder="Enter task" class="w-full border rounded-lg p-2">
+        </div>
+        <button id="add-button" class="bg-blue-500 text-white w-full py-2 rounded-lg mb-4">Add</button>
+        <ul id="todo-list" class="space-y-2">
+            <!-- Task items will be appended here dynamically -->
+        </ul>
+    </div>
+</body>
+
+<script>
+    document.getElementById('add-button').addEventListener('click', addTodo);
+
+function addTodo() {
+    const todoInput = document.getElementById('todo-input');
+    const todoText = todoInput.value.trim();
+
+    if (todoText === '') {
+        alert("Task cannot be empty");
+        return;
+    }
+
+    const todoList = document.getElementById('todo-list');
+
+    const listItem = document.createElement('li');
+    listItem.className = 'bg-blue-200 p-3 rounded-lg flex justify-between items-center';
+
+    const taskText = document.createElement('span');
+    taskText.textContent = todoText;
+
+    const editButton = document.createElement('button');
+    editButton.className = 'text-white bg-blue-600 p-2 rounded-lg ml-2';
+    editButton.innerHTML = 'Edit';
+    editButton.onclick = function() {
+        editTodoItem(taskText);
+    };
+
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'text-white bg-red-500 p-2 rounded-lg ml-2';
+    deleteButton.innerHTML = 'Delete';
+    deleteButton.onclick = function() {
+        todoList.removeChild(listItem);
+    };
+
+    listItem.appendChild(taskText);
+    listItem.appendChild(editButton);
+    listItem.appendChild(deleteButton);
+
+    todoList.appendChild(listItem);
+    todoInput.value = ''; // Clear the input after adding
+}
+
+function editTodoItem(taskElement) {
+    const newText = prompt("Edit your task:", taskElement.textContent);
+    if (newText !== null && newText.trim() !== '') {
+        taskElement.textContent = newText;
+    }
+}
+
+</script>

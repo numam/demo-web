@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="./output.css">
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white rounded-lg shadow-lg p-6">
+        <div class="text-right mb-4">
+            <input type="text" id="display" class="text-2xl w-full border p-3 rounded-md bg-gray-100" disabled>
+        </div>
+        <div class="grid grid-cols-4 gap-4">
+            <button class="col-span-2 bg-gray-300 text-black p-4 rounded-md" onclick="clearAll()">AC</button>
+            <button class="bg-gray-300 text-black p-4 rounded-md" onclick="appendToDisplay('%')">%</button>
+            <button class="bg-orange-500 text-white p-4 rounded-md" onclick="appendToDisplay('/')">/</button>
+            <button class="bg-gray-200 text-black p-4 rounded-md" onclick="appendToDisplay('7')">7</button>
+            <button class="bg-gray-200 text-black p-4 rounded-md" onclick="appendToDisplay('8')">8</button>
+            <button class="bg-gray-200 text-black p-4 rounded-md" onclick="appendToDisplay('9')">9</button>
+            <button class="bg-orange-500 text-white p-4 rounded-md" onclick="appendToDisplay('*')">*</button>
+            <button class="bg-gray-200 text-black p-4 rounded-md" onclick="appendToDisplay('4')">4</button>
+            <button class="bg-gray-200 text-black p-4 rounded-md" onclick="appendToDisplay('5')">5</button>
+            <button class="bg-gray-200 text-black p-4 rounded-md" onclick="appendToDisplay('6')">6</button>
+            <button class="bg-orange-500 text-white p-4 rounded-md" onclick="appendToDisplay('-')">-</button>
+            <button class="bg-gray-200 text-black p-4 rounded-md" onclick="appendToDisplay('1')">1</button>
+            <button class="bg-gray-200 text-black p-4 rounded-md" onclick="appendToDisplay('2')">2</button>
+            <button class="bg-gray-200 text-black p-4 rounded-md" onclick="appendToDisplay('3')">3</button>
+            <button class="bg-orange-500 text-white p-4 rounded-md" onclick="appendToDisplay('+')">+</button>
+            <button class="col-span-2 bg-gray-200 text-black p-4 rounded-md" onclick="appendToDisplay('0')">0</button>
+            <button class="bg-gray-200 text-black p-4 rounded-md" onclick="appendToDisplay('^')">^</button>
+            <button class="bg-orange-500 text-white p-4 rounded-md" onclick="calculate()">=</button>
+        </div>
+    </div>
+</body>
+
+<script>
+    let display = document.getElementById('display');
+
+    function appendToDisplay(value) {
+        display.value += value;
+    }
+
+    function clearAll() {
+        display.value = '';
+    }
+
+    function calculate() {
+        let expression = display.value;
+
+        // Ganti '^' dengan '**' untuk perhitungan pangkat di JS
+        expression = expression.replace('^', '**');
+
+        try {
+            display.value = eval(expression);
+        } catch (error) {
+            display.value = 'Error';
+        }
+    }
+
+</script>
+
+</html>
