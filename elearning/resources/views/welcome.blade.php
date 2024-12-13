@@ -6,11 +6,9 @@
     <title>Laravel Tailwind</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-100 text-gray-900">
-    <div class="flex items-center justify-center min-h-screen">
-        <h1 class="text-xl font-bold text-blue-600">
-            Laravel 11 + Tailwind CSS!
-        </h1>
-    </div>
+<body>
+    <h1>Selamat Datang di Aplikasi Laravel</h1>
+    <p>Ini adalah halaman awal aplikasi Anda.</p>
+    <a href="/posts">Lihat Daftar Post</a>
 </body>
 </html>
